@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 FINFLO = {
-    'WORK_MODEL' : ['tracker.employee'],
+    'WORK_MODEL' : ['tracker.employee','tracker.nonworker'],
     'PARTY_MODEL' : [] #optional
 }
 MIDDLEWARE = [
