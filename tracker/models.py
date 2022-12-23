@@ -7,5 +7,7 @@ class employee(models.Model):
 class nonworker(models.Model):
     name = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
-
+class pagenotes(models.Model):
+    note = models.CharField(max_length=200)
+    content = models.CharField(max_length=300)
         

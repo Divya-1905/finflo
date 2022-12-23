@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import employee,nonworker
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import employeeserializers,nonworkerseralizer
+from .serializers import employeeserializers,nonworkerseralizer,pageserializer+
 from rest_framework.permissions import IsAuthenticated
 # from django.contrib.auth.models import employee
 class EmployeeCreate(APIView):
@@ -36,7 +36,23 @@ class NonWorkerCreate(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({"staus":'nonworkercreated','data':serializer.data})
-        return Response({'status':'failure'})    
+        return Response({'status':'failure'})   
+class pagenotes(APIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = pageserializer 
+    def get(self,request):
+        try:
+            page = pagenotes.objects.all()
+            serializer = pageserializer(page)
+            return Response({'status':'created','data':serializer.data})
+        except:
+            return Response({'status':'noncreated'})
+    def post(self,request):
+        serializer = pageserializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"staus":'nonworkercreated','data':serializer.data})
+        return Response({'status':'failure'})              
         
 
     
